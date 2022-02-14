@@ -35,7 +35,7 @@ describe StatusLengthValidator do
     end
 
     it 'counts URLs as 23 characters flat' do
-      text   = ('a' * 476) + " http://#{'b' * 30}.com/example"
+      text   = ('a' * 2024) + " http://#{'b' * 30}.com/example"
       status = double(spoiler_text: '', text: text, errors: double(add: nil), local?: true, reblog?: false)
 
       subject.validate(status)
@@ -43,7 +43,7 @@ describe StatusLengthValidator do
     end
 
     it 'does not count non-autolinkable URLs as 23 characters flat' do
-      text   = ('a' * 476) + "http://#{'b' * 30}.com/example"
+      text   = ('a' * 2024) + "http://#{'b' * 30}.com/example"
       status = double(spoiler_text: '', text: text, errors: double(add: nil), local?: true, reblog?: false)
 
       subject.validate(status)
@@ -51,7 +51,7 @@ describe StatusLengthValidator do
     end
 
     it 'counts only the front part of remote usernames' do
-      text   = ('a' * 475) + " @alice@#{'b' * 30}.com"
+      text   = ('a' * 2023) + " @alice@#{'b' * 30}.com"
       status = double(spoiler_text: '', text: text, errors: double(add: nil), local?: true, reblog?: false)
 
       subject.validate(status)
