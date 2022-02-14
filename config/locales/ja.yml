@@ -1375,6 +1375,7 @@ ja:
     default: Mastodon (ダーク)
     mastodon-light: Mastodon (ライト)
     MstdnBlue: Mastodon (ブルー)
+    GB: Mastodon (GB)
   time:
     formats:
       default: "%Y年%m月%d日 %H:%M"
