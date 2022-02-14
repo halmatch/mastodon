@@ -2,8 +2,8 @@
 
 https://mstdn.kemono-friends.info
 
-[![Build Status](https://travis-ci.org/maa123/mastodon.svg?branch=master)](https://travis-ci.org/maa123/mastodon)
-[![Code Climate](https://img.shields.io/codeclimate/github/maa123/mastodon.svg)](https://codeclimate.com/github/maa123/mastodon)
+[![Build Status](https://img.shields.io/circleci/build/github/maa123/mastodon.svg)](https://circleci.com/gh/maa123/mastodon/tree/master)
+[![Code Climate](https://img.shields.io/codeclimate/maintainability/maa123/mastodon.svg)](https://codeclimate.com/github/maa123/mastodon/maintainability)
 
 エラーページの マストドンのフレンズは [桜木李杏](https://mstdn.kemono-friends.info/@cynthia_koko)さんに描いて頂きました。 
 
