@@ -368,7 +368,7 @@
 }
 
 .compose-form {
-  padding: 15px;
+  padding: 10px;
 
   &__sensitive-button {
     padding: 10px;
@@ -715,7 +715,7 @@
 
     .compose-form__publish-button-wrapper {
       overflow: hidden;
-      padding-top: 15px;
+      padding-top: 10px;
     }
   }
 }
@@ -823,7 +823,7 @@
 .reply-indicator__content {
   position: relative;
   font-size: 15px;
-  line-height: 22px;
+  line-height: 20px;
   word-wrap: break-word;
   font-weight: 400;
   overflow: hidden;
@@ -964,18 +964,18 @@
 }
 
 .status__content.status__content--collapsed {
-  max-height: 22px * 15; // 15 lines is roughly above 500 characters
+  max-height: 20px * 15; // 15 lines is roughly above 500 characters
 }
 
 .status__content__read-more-button {
   display: block;
   font-size: 15px;
-  line-height: 22px;
+  line-height: 20px;
   color: $highlight-text-color;
   border: 0;
   background: transparent;
   padding: 0;
-  padding-top: 16px;
+  padding-top: 8px;
   text-decoration: none;
 
   &:hover,
@@ -987,7 +987,7 @@
 .translate-button {
   margin-top: 16px;
   font-size: 15px;
-  line-height: 22px;
+  line-height: 20px;
   display: flex;
   justify-content: space-between;
   color: $dark-text-color;
@@ -1050,7 +1050,9 @@
 }
 
 .status {
-  padding: 16px;
+  padding: 8px 10px;
+  padding-left: 68px;
+  position: relative;
   min-height: 54px;
   border-bottom: 1px solid lighten($ui-base-color, 8%);
   cursor: auto;
@@ -1067,7 +1069,7 @@
   .video-player,
   .audio-player,
   .attachment-list {
-    margin-top: 16px;
+    margin-top: 8px;
   }
 
   &.light {
@@ -1108,16 +1110,7 @@
   }
 }
 
-.status__relative-time {
-  display: block;
-  font-size: 15px;
-  line-height: 22px;
-  height: 40px;
-  order: 2;
-  flex: 0 0 auto;
-  color: $dark-text-color;
-}
-
+.status__relative-time,
 .notification__relative_time {
   color: $dark-text-color;
   float: right;
@@ -1134,36 +1127,13 @@
 }
 
 .status__info .status__display-name {
+  display: block;
   max-width: 100%;
-  display: flex;
-  font-size: 15px;
-  line-height: 22px;
-  align-items: center;
-  gap: 10px;
-  overflow: hidden;
-
-  .display-name {
-    bdi {
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    &__account {
-      white-space: nowrap;
-      display: block;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-  }
+  padding-right: 25px;
 }
 
 .status__info {
   font-size: 15px;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
 }
 
 .status-check-box__status {
@@ -1202,14 +1172,12 @@
 }
 
 .status__prepend {
-  padding: 16px;
-  padding-bottom: 0;
-  display: flex;
-  gap: 10px;
-  font-size: 15px;
-  line-height: 22px;
-  font-weight: 500;
+  margin-left: 68px;
   color: $dark-text-color;
+  padding: 8px 0;
+  padding-bottom: 2px;
+  font-size: 14px;
+  position: relative;
 
   .status__display-name strong {
     color: $dark-text-color;
@@ -1227,7 +1195,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 18px;
-  margin-top: 16px;
+  margin-top: 8px;
 }
 
 .detailed-status__action-bar-dropdown {
@@ -1240,7 +1208,7 @@
 
 .detailed-status {
   background: lighten($ui-base-color, 4%);
-  padding: 16px;
+  padding: 14px 10px;
 
   &--flex {
     display: flex;
@@ -1273,12 +1241,12 @@
   .media-gallery,
   .video-player,
   .audio-player {
-    margin-top: 16px;
+    margin-top: 8px;
   }
 }
 
 .detailed-status__meta {
-  margin-top: 16px;
+  margin-top: 15px;
   color: $dark-text-color;
   font-size: 14px;
   line-height: 18px;
@@ -1341,7 +1309,7 @@
 }
 
 .account {
-  padding: 16px;
+  padding: 10px;
   border-bottom: 1px solid lighten($ui-base-color, 8%);
 
   &.compact {
@@ -1355,9 +1323,7 @@
 
   .account__display-name {
     flex: 1 1 auto;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    display: block;
     color: $darker-text-color;
     overflow: hidden;
     text-decoration: none;
@@ -1398,7 +1364,9 @@
 
   display: block;
   position: relative;
-  overflow: hidden;
+  width: 36px;
+  height: 36px;
+  background-size: 36px 36px;
 
   img {
     display: block;
@@ -1626,12 +1594,9 @@ a.account__display-name {
 
 .detailed-status__display-name {
   color: $darker-text-color;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 15px;
-  line-height: 22px;
-  margin-bottom: 16px;
+  display: block;
+  line-height: 24px;
+  margin-bottom: 15px;
   overflow: hidden;
 
   strong,
@@ -1642,13 +1607,31 @@ a.account__display-name {
   }
 
   strong {
+    font-size: 16px;
     color: $primary-text-color;
   }
 }
 
+.detailed-status__display-avatar {
+  float: left;
+  margin-right: 10px;
+}
+
 .status__avatar {
-  width: 46px;
-  height: 46px;
+  height: 48px;
+  left: 10px;
+  position: absolute;
+  top: 10px;
+  width: 48px;
+}
+
+.status__expand {
+  width: 68px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  cursor: pointer;
 }
 
 .muted {
