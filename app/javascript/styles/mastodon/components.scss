@@ -166,6 +166,30 @@
     &:disabled {
       opacity: 0.5;
     }
+
+    &.button--confirmation {
+      color: $valid-value-color;
+      border-color: $valid-value-color;
+
+      &:active,
+      &:focus,
+      &:hover {
+        background: $valid-value-color;
+        color: $primary-text-color;
+      }
+    }
+
+    &.button--destructive {
+      color: $error-value-color;
+      border-color: $error-value-color;
+
+      &:active,
+      &:focus,
+      &:hover {
+        background: $error-value-color;
+        color: $primary-text-color;
+      }
+    }
   }
 
   &.button--block {
@@ -339,8 +363,8 @@
   }
 }
 
-.dropdown-menu {
-  position: absolute;
+body > [data-popper-placement] {
+  z-index: 3;
 }
 
 .invisible {
@@ -399,7 +423,7 @@
 
       &.active {
         border-color: $highlight-text-color;
-        background: $highlight-text-color;
+        background: $highlight-text-color url("data:image/svg+xml;utf8,<svg width='18' height='18' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M4.5 8.5L8 12l6-6' stroke='white' stroke-width='1.5'/></svg>") center center no-repeat;
       }
     }
   }
@@ -1892,6 +1916,42 @@ a.account__display-name {
   text-decoration: none;
 }
 
+.dropdown-animation {
+  animation: dropdown 300ms cubic-bezier(0.1, 0.7, 0.1, 1);
+
+  @keyframes dropdown {
+    from {
+      opacity: 0;
+      transform: scaleX(0.85) scaleY(0.75);
+    }
+
+    to {
+      opacity: 1;
+      transform: scaleX(1) scaleY(1);
+    }
+  }
+
+  &.top {
+    transform-origin: bottom;
+  }
+
+  &.right {
+    transform-origin: left;
+  }
+
+  &.bottom {
+    transform-origin: top;
+  }
+
+  &.left {
+    transform-origin: right;
+  }
+
+  .reduce-motion & {
+    animation: none;
+  }
+}
+
 .dropdown {
   display: inline-block;
 }
@@ -1976,36 +2036,42 @@ a.account__display-name {
 
 .dropdown-menu__arrow {
   position: absolute;
-  width: 0;
-  height: 0;
-  border: 0 solid transparent;
 
-  &.left {
-    right: -5px;
-    margin-top: -5px;
-    border-width: 5px 0 5px 5px;
-    border-left-color: $ui-secondary-color;
+  &::before {
+    content: '';
+    display: block;
+    width: 14px;
+    height: 5px;
+    background-color: $ui-secondary-color;
+    mask-image: url("data:image/svg+xml;utf8,<svg width='14' height='5' xmlns='http://www.w3.org/2000/svg'><path d='M7 0L0 5h14L7 0z' fill='white'/></svg>");
   }
 
   &.top {
     bottom: -5px;
-    margin-left: -7px;
-    border-width: 5px 7px 0;
-    border-top-color: $ui-secondary-color;
+
+    &::before {
+      transform: rotate(180deg);
+    }
+  }
+
+  &.right {
+    left: -9px;
+
+    &::before {
+      transform: rotate(-90deg);
+    }
   }
 
   &.bottom {
     top: -5px;
-    margin-left: -7px;
-    border-width: 0 7px 5px;
-    border-bottom-color: $ui-secondary-color;
   }
 
-  &.right {
-    left: -5px;
-    margin-top: -5px;
-    border-width: 5px 5px 5px 0;
-    border-right-color: $ui-secondary-color;
+  &.left {
+    right: -9px;
+
+    &::before {
+      transform: rotate(90deg);
+    }
   }
 }
 
@@ -2201,6 +2267,7 @@ $ui-header-height: 55px;
   z-index: 2;
   justify-content: space-between;
   align-items: center;
+  overflow: hidden;
 
   &__logo {
     display: inline-flex;
@@ -2217,9 +2284,14 @@ $ui-header-height: 55px;
     align-items: center;
     gap: 10px;
     padding: 0 10px;
+    overflow: hidden;
 
     .button {
       flex: 0 0 auto;
+    }
+
+    .button-tertiary {
+      flex-shrink: 1;
     }
   }
 }
@@ -2452,8 +2524,7 @@ $ui-header-height: 55px;
     height: calc(100% - 10px) !important;
   }
 
-  .getting-started__wrapper,
-  .search {
+  .getting-started__wrapper {
     margin-bottom: 10px;
   }
 
@@ -2506,7 +2577,7 @@ $ui-header-height: 55px;
     }
   }
 
-  .ui__header {
+  .layout-single-column .ui__header {
     display: flex;
     background: $ui-base-color;
     border-bottom: 1px solid lighten($ui-base-color, 8%);
@@ -3123,12 +3194,16 @@ $ui-header-height: 55px;
     margin-top: 10px;
 
     h4 {
+      border-bottom: 1px solid lighten($ui-base-color, 8%);
+      padding: 10px;
       font-size: 12px;
       text-transform: uppercase;
-      color: $darker-text-color;
-      padding: 10px;
       font-weight: 500;
-      border-bottom: 1px solid lighten($ui-base-color, 8%);
+
+      a {
+        color: $darker-text-color;
+        text-decoration: none;
+      }
     }
 
     @media screen and (max-height: 810px) {
@@ -4219,7 +4294,7 @@ a.status-card.compact:hover {
 }
 
 @keyframes heartbeat {
-  from {
+  0% {
     transform: scale(1);
     animation-timing-function: ease-out;
   }
@@ -4289,7 +4364,7 @@ a.status-card.compact:hover {
 
 .emoji-picker-dropdown__menu {
   background: $simple-background-color;
-  position: absolute;
+  position: relative;
   box-shadow: 4px 4px 6px rgba($base-shadow-color, 0.4);
   border-radius: 4px;
   margin-top: 5px;
@@ -4350,14 +4425,14 @@ a.status-card.compact:hover {
   align-items: center;
   background: rgba($base-overlay-background, 0.8);
   display: flex;
-  height: 100%;
+  height: 100vh;
   justify-content: center;
   left: 0;
   opacity: 0;
-  position: absolute;
+  position: fixed;
   top: 0;
   visibility: hidden;
-  width: 100%;
+  width: 100vw;
   z-index: 2000;
 
   * {
@@ -4475,7 +4550,6 @@ a.status-card.compact:hover {
 }
 
 .privacy-dropdown__dropdown {
-  position: absolute;
   background: $simple-background-color;
   box-shadow: 2px 4px 15px rgba($base-shadow-color, 0.4);
   border-radius: 4px;
@@ -4581,7 +4655,6 @@ a.status-card.compact:hover {
 
 .language-dropdown {
   &__dropdown {
-    position: absolute;
     background: $simple-background-color;
     box-shadow: 2px 4px 15px rgba($base-shadow-color, 0.4);
     border-radius: 4px;
@@ -4645,6 +4718,7 @@ a.status-card.compact:hover {
 }
 
 .search {
+  margin-bottom: 10px;
   position: relative;
 }
 
@@ -4827,7 +4901,6 @@ a.status-card.compact:hover {
 .modal-root__modal {
   pointer-events: auto;
   display: flex;
-  z-index: 9999;
 }
 
 .video-modal__container {
@@ -5709,6 +5782,7 @@ a.status-card.compact:hover {
   &__container {
     padding: 30px;
     pointer-events: all;
+    overflow-y: auto;
   }
 
   .status__content {
@@ -6696,7 +6770,8 @@ noscript {
   }
 }
 
-.moved-account-banner {
+.moved-account-banner,
+.follow-request-banner {
   padding: 20px;
   background: lighten($ui-base-color, 4%);
   display: flex;
@@ -6719,11 +6794,16 @@ noscript {
     justify-content: space-between;
     align-items: center;
     gap: 15px;
+    width: 100%;
   }
 
   .detailed-status__display-name {
     margin-bottom: 0;
   }
+}
+
+.follow-request-banner .button {
+  width: 100%;
 }
 
 .column-inline-form {
@@ -6995,7 +7075,6 @@ noscript {
       display: block;
       flex: 0 0 auto;
       width: 94px;
-      margin-left: -2px;
 
       .account__avatar {
         background: darken($ui-base-color, 8%);
@@ -7012,6 +7091,7 @@ noscript {
     padding-top: 10px;
     gap: 8px;
     overflow: hidden;
+    margin-left: -2px; // aligns the pfp with content below
 
     &__buttons {
       display: flex;
@@ -7066,6 +7146,10 @@ noscript {
           font-weight: 400;
           overflow: hidden;
           text-overflow: ellipsis;
+
+          span {
+            user-select: all;
+          }
         }
       }
     }
@@ -7118,10 +7202,12 @@ noscript {
 
       .verified {
         border: 1px solid rgba($valid-value-color, 0.5);
+        margin-top: -1px;
 
         &:first-child {
           border-top-left-radius: 4px;
           border-top-right-radius: 4px;
+          margin-top: 0;
         }
 
         &:last-child {
@@ -7281,7 +7367,7 @@ noscript {
 
       path:first-child {
         fill: rgba($highlight-text-color, 0.25) !important;
-        fill-opacity: 100% !important;
+        fill-opacity: 1 !important;
       }
 
       path:last-child {
@@ -7634,7 +7720,7 @@ noscript {
       left: 0;
       width: 100%;
       height: 100%;
-      border-left: 2px solid $highlight-text-color;
+      border-left: 4px solid $highlight-text-color;
       pointer-events: none;
     }
   }
@@ -7953,7 +8039,8 @@ noscript {
   width: 600px;
   background: $ui-base-color;
   border-radius: 8px;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   position: relative;
   display: block;
   padding: 20px;
